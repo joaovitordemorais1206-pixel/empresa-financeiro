@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Página Inicial - Análise de Empresa{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Apresentação do projeto</h2>
+    <p>
+        Este site é um modelo simples para organizar a análise de uma empresa
+        real ou fictícia. Cada grupo pode personalizar os textos, cores,
+        imagens e estilos conforme a empresa escolhida.
+    </p>
+    <p>
+        Escolha um grupo abaixo para ver uma página de exemplo.
+    </p>
+</section>
+
+<section>
+    <h2>Grupos</h2>
+    <div class="grid">
+        {% for grupo in grupos %}
+            <a class="card" href="{{ url_for('grupo', slug=grupo[2]) }}">
+                {{ grupo[1] }}
+            </a>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Histórico - {{ grupo_nome }}{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Histórico de Análise - {{ grupo_nome }}</h2>
+    <p>
+        <a href="{{ url_for('grupo', slug=grupo_slug) }}">Voltar para o grupo</a>
+    </p>
+</section>
+
+<section>
+    <h3>{% if editando %}Editar registro{% else %}Adicionar novo registro{% endif %}</h3>
+    {% if editando %}
+        <form method="POST" action="{{ url_for('editar_historico', slug=grupo_slug, historico_id=editando[0]) }}">
+            <div class="form-group">
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" value="{{ editando[1] }}" required>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" name="descricao" value="{{ editando[3] }}" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-salvar">Salvar</button>
+                <button type="button" class="btn btn-cancelar" onclick="window.location.href='{{ url_for('historico', slug=grupo_slug) }}'">Cancelar</button>
+            </div>
+        </form>
+    {% else %}
+        <form method="POST" action="{{ url_for('adicionar_historico', slug=grupo_slug) }}">
+            <div class="form-group">
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" required>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" name="descricao" required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-salvar">Adicionar</button>
+            </div>
+        </form>
+    {% endif %}
+</section>
+
+<section>
+    <h3>Registros salvos</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Grupo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in historico %}
+                <tr>
+                    <td>{{ item[1].strftime('%d/%m/%Y') }}</td>
+                    <td>{{ item[2] }}</td>
+                    <td>{{ item[3] }}</td>
+                    <td class="acoes">
+                        <button type="button" class="btn btn-editar" onclick="window.location.href='{{ url_for('editar_historico', slug=grupo_slug, historico_id=item[0]) }}'">Editar</button>
+                        <form method="POST" action="{{ url_for('remover_historico', slug=grupo_slug, historico_id=item[0]) }}" class="form-inline">
+                            <button type="submit" class="btn btn-remover">Remover</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Nenhum registro encontrado para este grupo.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

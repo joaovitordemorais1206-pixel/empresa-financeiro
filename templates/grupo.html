@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Grupo {{ grupo_nome }} - Análise de Empresa{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Grupo {{ grupo_nome }}</h2>
+    <p>
+        Esta página serve como modelo para a análise do grupo
+        {{ grupo_nome }}. Substitua os textos de exemplo pelas informações
+        pesquisadas pela equipe.
+    </p>
+</section>
+
+<section>
+    <h2>Apresentação da empresa analisada</h2>
+    <p>Digite aqui o nome da empresa analisada.</p>
+    <p>Explique aqui qual produto ou serviço essa empresa oferece.</p>
+</section>
+
+<section>
+    <h2>Apresentação da equipe</h2>
+    <p>Digite aqui o nome dos integrantes da equipe e suas funções no trabalho.</p>
+</section>
+
+<section>
+    <h2>Função do grupo dentro da empresa</h2>
+    <p>Descreva aqui como o grupo funciona dentro da empresa.</p>
+</section>
+
+<section>
+    <h2>Principais atividades do grupo</h2>
+    <ul>
+        <li>Atividade principal 1.</li>
+        <li>Atividade principal 2.</li>
+        <li>Atividade principal 3.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Análise da empresa</h2>
+    <p>
+        Escreva aqui a análise feita pela equipe sobre os pontos fortes,
+        dificuldades e características observadas na empresa.
+    </p>
+</section>
+
+<section>
+    <h2>Propostas de melhoria</h2>
+    <p>Liste aqui as principais melhorias sugeridas pela equipe.</p>
+</section>
+
+<section>
+    <h2>Histórico da análise</h2>
+    <p>
+        <a href="{{ url_for('historico', slug=grupo_slug) }}">Abrir histórico de análise</a>
+    </p>
+</section>
+
+<section>
+    <h2>Conclusão da equipe</h2>
+    <p>
+        Escreva aqui a conclusão da equipe sobre a importância desse grupo para
+        a empresa analisada.
+    </p>
+</section>
+{% endblock %}
